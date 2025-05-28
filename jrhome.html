@@ -3,8 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JobRinger Header</title>
+    <title>JobRinger - Find Your Dream Job</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/your-kit-id.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1a2e4a",
+              secondary: "#d4af37",
+            },
+          },
+        },
+      };
+    </script>
     <script>
       function scrollJobs(direction) {
         const container = document.getElementById("jobContainer");
@@ -16,10 +33,58 @@
         });
       }
     </script>
-<script src="script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("mobileSidebar");
+        sidebar.classList.toggle("-translate-x-full");
+      }
+      function toggleLoginModal() {
+        const modal = document.getElementById("loginModal");
+        modal.classList.toggle("hidden");
+      }
+    </script>
+    <!-- <script src="script.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <script>
+      /** @type {import('tailwindcss').Config} */
+      module.exports = {
+        content: [
+          "./pages/**/*.{js,ts,jsx,tsx}",
+          "./components/**/*.{js,ts,jsx,tsx}",
+          "./app/**/*.{js,ts,jsx,tsx}", // Adjust this path if your files are elsewhere
+        ],
+        theme: {
+          extend: {
+            animation: {
+              "marquee-slow": "marquee 30s linear infinite",
+            },
+            keyframes: {
+              marquee: {
+                "0%": { transform: "translateX(0%)" },
+                "100%": { transform: "translateX(-100%)" },
+              },
+            },
+          },
+        },
+        plugins: [],
+      };
+    </script>
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+      }
       .nav-link {
         position: relative;
       }
@@ -44,657 +109,1378 @@
         scrollbar-width: none;
       }
 
-     @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
 
-.animate-marquee-slow {
-  animation: marquee 30s linear infinite; /* Adjust '30s' for speed */
-}
+      .animate-marquee-slow {
+        animation: marquee 30s linear infinite; /* Adjust '30s' for speed */
+      }
 
-/* This targets the PARENT of the scrolling divs to pause on hover */
-.relative.w-full.flex.overflow-hidden.py-4:hover .animate-marquee-slow {
-  animation-play-state: paused;
-}
+      /* This targets the PARENT of the scrolling divs to pause on hover */
+      .relative.w-full.flex.overflow-hidden.py-4:hover .animate-marquee-slow {
+        animation-play-state: paused;
+      }
+
+      .job-card {
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(26, 46, 74, 0.95) 0%,
+          rgba(26, 46, 74, 0.9) 100%
+        );
+      }
+
+      .floating-btn {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+      }
+
+      .floating-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
     </style>
   </head>
   <body class="bg-gray-100">
     <!-- Header -->
-   <header class="sticky top-0 z-50 bg-white shadow-md">
-  <div
-    class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between"
-  >
-    <div
-      class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition duration-300 cursor-pointer"
-    >
-      jobRinger
-    </div>
-
-    <nav
-      class="flex flex-wrap gap-6 items-center text-gray-700 font-medium"
-    >
-      <a href="#" class="nav-link hover:text-blue-600 transition">Jobs</a>
-      <a href="#" class="nav-link hover:text-blue-600 transition"
-        >Active Employers</a
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+      <div
+        class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between"
       >
-      <a href="#" class="nav-link hover:text-blue-600 transition"
-        >Job Blogs</a
-      >
-      <a href="#" class="nav-link hover:text-blue-600 transition"
-        >Pricing</a
-      >
+        <a href="/" class="cursor-pointer transition duration-300 p-0 m-0">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShibTd7GJe3pEurVidD-vCkLboUVPhWYH9WA&s"
+            alt="jobRinger Logo"
+            class="h-10 w-auto p-0 m-0 block hover:opacity-80"
+          />
+        </a>
 
-      <a
-        href="#"
-        class="px-3 py-1 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition duration-300 transform hover:scale-105"
-      >
-        Jobseeker Login
-      </a>
-      <a
-        href="#"
-        class="px-3 py-1 bg-yellow-500 text-white rounded-md font-semibold hover:bg-yellow-600 transition duration-300 transform hover:scale-105"
-      >
-        Employer Login
-      </a>
-    </nav>
-  </div>
-</header>
+        <!-- Notification and Mobile Menu (Mobile Only) -->
+        <div class="flex items-center space-x-4 md:hidden">
+          <button>
+            <i
+              class="fas fa-bell text-gray-600 text-xl hover:text-blue-600"
+            ></i>
+          </button>
+          <button onclick="toggleSidebar()">
+            <i
+              class="fas fa-bars text-gray-600 text-xl hover:text-blue-600"
+            ></i>
+          </button>
+        </div>
 
-    <!-- Page Content -->
-    <section >
-      <!-- Promo Bar -->
-  <section
-  class="max-w-7xl mx-auto mt-3 px-4 py-1 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-2 text-gray-900"
->
-  <div
-    class="flex-shrink-0 text-lg font-extrabold tracking-wide text-yellow-900 text-center md:text-left w-full md:w-auto"
-  >
-    Employers
-  </div>
-
-  <div
-    class="flex-grow text-base md:text-lg font-semibold italic text-center md:text-left max-w-xl w-full"
-  >
-    WELCOME OFFER - <span class="uppercase">FREE JOB Postings</span> and Much
-    More.
-  </div>
-
-  <div class="flex flex-wrap gap-2 justify-center md:justify-end w-full md:w-auto">
-    <a
-      href="#"
-      class="bg-yellow-600 text-white px-4 py-1.5 rounded-full font-semibold text-sm shadow-md hover:bg-yellow-700 transition whitespace-nowrap"
-    >
-      Register for FREE
-    </a>
-
-    <a
-      href="#"
-      class="bg-yellow-50 border-2 border-yellow-600 text-yellow-700 px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-yellow-600 hover:text-white transition whitespace-nowrap"
-    >
-      Post A Job
-    </a>
-
-    <a
-      href="#"
-      class="text-yellow-900 underline font-semibold hover:text-yellow-800 transition self-center whitespace-nowrap text-sm"
-    >
-      Sales Enquiry
-    </a>
-  </div>
-</section>
-
-  <section class="bg-gradient-to-br from-blue-50 to-[#7ad5d5]  mx-auto my-5 px-6 py-10 sm:px-8 lg:px-12 ">
-  <div class="max-w-7xl mx-auto text-center md:text-left">
-    <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight">
-      Your <span class="text-indigo-700">Next Career Move</span> Starts Here
-    </h1>
-    <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-xl mx-auto md:mx-0">
-      Discover over <span class="font-bold text-indigo-600">11,000+</span> exciting job opportunities.
-    </p>
-
-    <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-3 md:space-y-0 mb-8 justify-center">
-      <form class="flex w-full max-w-2xl md:max-w-xl rounded-full bg-white border border-gray-300 shadow-sm focus-within:ring-2 focus-within:ring-indigo-300 overflow-hidden">
-        <input
-          type="search"
-          placeholder="Search job titles, skills, or locations..."
-          aria-label="Search jobs"
-          class="flex-grow px-4 py-2 text-base text-gray-800 placeholder-gray-500 focus:outline-none"
-        />
-        <button
-          type="submit"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 font-semibold text-sm rounded-r-full transition-all duration-200 ease-in-out flex items-center justify-center group"
+        <!-- Full Nav (Hidden on mobile) -->
+        <nav
+          class="hidden md:flex flex-wrap gap-6 items-center text-gray-700 font-medium"
         >
-          <svg class="w-4 h-4 mr-1 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          Search
-        </button>
-      </form>
-
-      <div class="flex space-x-3 justify-center md:justify-start">
-        <a href="#" class="inline-flex items-center justify-center px-5 py-2 rounded-full border border-indigo-600 text-indigo-600 font-semibold text-sm hover:bg-indigo-600 hover:text-white transition-all duration-200 ease-in-out shadow-sm whitespace-nowrap">
-          View Jobs
-        </a>
-        <a href="#" class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-semibold text-sm hover:from-indigo-700 hover:to-purple-800 transition-all duration-200 ease-in-out shadow-sm whitespace-nowrap">
-          Register FREE
-        </a>
-      </div>
-    </div>
-
-   <div class="mt-8">
-  <h3 class="text-lg font-semibold text-gray-800 mb-4">Explore Job Categories:</h3>
-
-  <!-- Group wrapper to control hover -->
-  <div class="overflow-hidden whitespace-nowrap group">
-    <!-- Animated inner container -->
-    <div class="flex gap-x-3 animate-marquee-slow w-max hover:[animation-play-state:paused]">
-      
-      <!-- Duplicate content twice for seamless scroll -->
-      <div class="flex gap-x-3">
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Fresher</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Work From Home</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#WFH</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#IT</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#HR</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Back Office</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#BPO Jobs</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#ITES</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Finance</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Accounts</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Medical</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Pharma</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Manager</a>
-      </div>
-
-      <!-- Duplicate again for infinite scroll -->
-      <div class="flex gap-x-3">
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Fresher</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Work From Home</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#WFH</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#IT</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#HR</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Back Office</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#BPO Jobs</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#ITES</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Finance</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Accounts</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Medical</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Pharma</a>
-        <a href="#" class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs">#Manager</a>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-  </div>
-</section>
-
-
-      <section class="bg-gray-50 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-10">Featured Jobs</h2>
-
-         
-
-          <!-- Scroll Container -->
-           <div class="relative">
-          <div
-            id="jobContainer"
-            class="flex space-x-6 overflow-x-auto pb-4 scroll-smooth no-scrollbar"
+          <a href="#" class="nav-link hover:text-blue-600 transition">Jobs</a>
+          <a href="#" class="nav-link hover:text-blue-600 transition"
+            >Active Employers</a
           >
-            <!-- Job Card Template (Repeat below for more jobs) -->
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                WordPress Developer
-              </h3>
-              <p class="text-sm text-gray-600">Nadcab Labs</p>
-              <p class="text-sm text-gray-500 mt-2 flex items-center gap-1">
-                <!-- Briefcase icon -->
-                <svg
-                  xmlns="https://media.licdn.com/dms/image/v2/D4D0BAQF-jLxerm0u-w/company-logo_200_200/company-logo_200_200/0/1726115138335/devx_commerce_logo?e=2147483647&v=beta&t=4CF5Bi26oTf5rU-8zLNwj5TFwCTCVFbjfzZIRdgWKPo"
-                  class="h-4 w-4 text-indigo-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12h6m2 0a2 2 0 002-2V7a2 2 0 00-2-2h-2.586a1 1 0 01-.707-.293l-1.414-1.414a1 1 0 00-.707-.293H9.414a1 1 0 00-.707.293L7.293 4.707A1 1 0 016.586 5H4a2 2 0 00-2 2v3a2 2 0 002 2h16z"
-                  />
-                </svg>
-                Full Time - Permanent
-              </p>
-              <p class="text-sm text-gray-500 flex items-center gap-1">
-                <!-- Clock icon -->
-                <svg
-                  xmlns="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?semt=ais_hybrid&w=740"
-                  class="h-4 w-4 text-indigo-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                5 - 8 Years
-              </p>
-              <p class="text-sm text-gray-500 mb-4 flex items-center gap-1">
-                <!-- Map pin icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-indigo-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"
-                  />
-                </svg>
-                Allahabad / Prayagraj / India
-              </p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+          <a href="#" class="nav-link hover:text-blue-600 transition"
+            >Job Blogs</a
+          >
+          <a href="#" class="nav-link hover:text-blue-600 transition"
+            >Pricing</a
+          >
 
-            <!-- Paste other job cards here (Python, HR Specialist, Graphic Designer, etc.) using the same structure -->
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-purple-100 text-purple-600 rounded-full mb-3 w-fit"
-                >Hybrid job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Python Fullstack Developer
-              </h3>
-              <p class="text-sm text-gray-600">Tredence Inc.</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">5 - 8 Years</p>
-              <p class="text-sm text-gray-500 mb-4">
-                Pune | Gurgaon | Bangalore | Kolkata / India
-              </p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+          <a
+            href="#"
+            class="px-3 py-1 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+          >
+            Jobseeker Login
+          </a>
+          <a
+            href="#"
+            class="px-3 py-1 bg-yellow-500 text-white rounded-md font-semibold hover:bg-yellow-600 transition duration-300 transform hover:scale-105"
+          >
+            Employer Login
+          </a>
+        </nav>
+      </div>
+    </header>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-green-100 text-green-600 rounded-full mb-3 w-fit"
-                >Remote job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                HR Specialist (Junior)
-              </h3>
-              <p class="text-sm text-gray-600">AgileEngine</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">2 - 4 Years</p>
-              <p class="text-sm text-gray-500 mb-4">
-                Greater Buenos Aires / Argentina
-              </p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+    <!-- Mobile Bottom Navigation -->
+    <!-- Bottom Navigation (Mobile only) -->
+    <div
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-inner border-t z-40"
+    >
+      <div class="flex justify-around items-center text-sm text-gray-700 py-2">
+        <a href="#" class="flex flex-col items-center hover:text-blue-600">
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs">Home</span>
+        </a>
+        <a href="#" class="flex flex-col items-center hover:text-blue-600">
+          <i class="fas fa-briefcase text-xl"></i>
+          <span class="text-xs">Jobs</span>
+        </a>
+        <!-- Login Dropdown -->
+        <div class="relative group">
+          <button
+            onclick="toggleLoginModal()"
+            class="flex flex-col items-center text-xs hover:text-blue-600"
+          >
+            <i class="fas fa-user text-lg"></i>
+            Login
+          </button>
+        </div>
+        <button
+          onclick="history.back()"
+          class="flex flex-col items-center hover:text-blue-600"
+        >
+          <i class="fas fa-arrow-left text-xl"></i>
+          <span class="text-xs">Back</span>
+        </button>
+      </div>
+    </div>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Graphic Designer
-              </h3>
-              <p class="text-sm text-gray-600">Archetype</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">3 - 5 Years</p>
-              <p class="text-sm text-gray-500 mb-4">New Delhi / India</p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+    <!-- Sidebar Drawer for Mobile -->
+    <!-- Sidebar -->
+    <div
+      id="mobileSidebar"
+      class="fixed top-0 left-0 w-64 h-full bg-white shadow-md transform -translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="p-4 border-b flex justify-between items-center">
+        <h2 class="text-lg font-bold text-blue-700">Menu</h2>
+        <button onclick="toggleSidebar()">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <ul class="p-4 space-y-4">
+        <li>
+          <a href="#" class="block hover:bg-gray-100 px-2 py-1 rounded">Jobs</a>
+        </li>
+        <li>
+          <a href="#" class="block hover:bg-gray-100 px-2 py-1 rounded"
+            >Employers</a
+          >
+        </li>
+        <li>
+          <a href="#" class="block hover:bg-gray-100 px-2 py-1 rounded"
+            >Job Blogs</a
+          >
+        </li>
+        <li>
+          <a href="#" class="block hover:bg-gray-100 px-2 py-1 rounded"
+            >Pricing</a
+          >
+        </li>
+      </ul>
+    </div>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Associate Accountant
-              </h3>
-              <p class="text-sm text-gray-600">WeMakeScholars</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">0 - 5 Years</p>
-              <p class="text-sm text-gray-500 mb-4">Nagpur / India</p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+    <!-- MOBILE LOGIN MODAL -->
+    <div
+      id="loginModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50 sm:hidden hidden"
+    >
+      <div class="bg-white w-full rounded-t-xl p-6 shadow-lg">
+        <button
+          onclick="toggleLoginModal()"
+          class="absolute top-2 right-4 text-gray-600 text-xl"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <h2 class="text-lg font-semibold mb-4 text-center">
+          Select Login Option
+        </h2>
+        <div class="flex flex-col space-y-4">
+          <a
+            href="#"
+            class="w-full text-center py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition"
+            >Jobseeker Login</a
+          >
+          <a
+            href="#"
+            class="w-full text-center py-2 bg-yellow-500 text-white rounded-md font-semibold hover:bg-yellow-600 transition"
+            >Employer Login</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Page Content -->
+    <section>
+      <!-- Promo Bar -->
+      <section
+        class="max-w-7xl mx-auto mt-3 px-4 py-1 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-2 text-gray-900"
+      >
+        <div
+          class="flex-shrink-0 text-lg font-extrabold tracking-wide text-yellow-900 text-center md:text-left w-full md:w-auto"
+        >
+          Employers
+        </div>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Field Marketing Executive
-              </h3>
-              <p class="text-sm text-gray-600">ACT FIBERNET</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">2 - 4 Years</p>
-              <p class="text-sm text-gray-500 mb-4">Ahmedabad / India</p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+        <div
+          class="flex-grow text-base md:text-lg font-semibold italic text-center md:text-left max-w-xl w-full"
+        >
+          WELCOME OFFER - <span class="uppercase">FREE JOB Postings</span> and
+          Much More.
+        </div>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Product Manager - Ad Tech
-              </h3>
-              <p class="text-sm text-gray-600">jobringer.com</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">3 - 5 Years</p>
-              <p class="text-sm text-gray-500 mb-4">Pune / India</p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
+        <div
+          class="flex flex-wrap gap-2 justify-center md:justify-end w-full md:w-auto"
+        >
+          <a
+            href="#"
+            class="bg-yellow-600 text-white px-4 py-1.5 rounded-full font-semibold text-sm shadow-md hover:bg-yellow-700 transition whitespace-nowrap"
+          >
+            Register for FREE
+          </a>
 
-            <div
-              class="min-w-[300px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
-            >
-              <span
-                class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
-                >In Office job</span
-              >
-              <h3 class="text-lg font-semibold text-gray-800">
-                Lead Consultant
-              </h3>
-              <p class="text-sm text-gray-600">DigitalRecruiter</p>
-              <p class="text-sm text-gray-500 mt-2">Full Time - Permanent</p>
-              <p class="text-sm text-gray-500">5 - 8 Years</p>
-              <p class="text-sm text-gray-500 mb-4">Melbourne / Australia</p>
-              <a
-                href="#"
-                class="mt-auto text-center bg-indigo-600 text-white rounded-full py-2 px-4 hover:bg-indigo-700 transition"
-                >Apply</a
-              >
-            </div>
-          </div>
-           <button
-    onclick="scrollJobs(-1)"
-    class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white border rounded-full shadow hover:bg-gray-100"
-  >
-     <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-  </button>
+          <a
+            href="#"
+            class="bg-yellow-50 border-2 border-yellow-600 text-yellow-700 px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-yellow-600 hover:text-white transition whitespace-nowrap"
+          >
+            Post A Job
+          </a>
 
-  <!-- Right Arrow -->
-  <button
-    onclick="scrollJobs(1)"
-    class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white border rounded-full shadow hover:bg-gray-100"
-  >
-     <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-  </button>
+          <a
+            href="#"
+            class="text-yellow-900 underline font-semibold hover:text-yellow-800 transition self-center whitespace-nowrap text-sm"
+          >
+            Sales Enquiry
+          </a>
         </div>
       </section>
-  <section class="bg-white py-12 px-6 overflow-hidden">
-  <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-10">Featured Employers</h2>
 
-    <div class="relative w-full flex overflow-hidden py-4 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-      <div class="flex animate-marquee-slow whitespace-nowrap items-center">
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://www.shutterstock.com/shutterstock/photos/2200188803/display_1500/stock-vector-colorful-creative-number-logo-with-leading-lines-and-road-concept-design-number-with-geometric-2200188803.jpg" alt="Company A Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
+      <section
+        class="bg-gradient-to-br from-blue-50 to-[#7ad5d5] mx-auto my-5 px-6 py-10 sm:px-8 lg:px-12"
+      >
+        <div class="max-w-7xl mx-auto text-center md:text-left">
+          <h1
+            class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight"
+          >
+            Your <span class="text-indigo-700">Next Career Move</span> Starts
+            Here
+          </h1>
+          <p
+            class="text-lg md:text-xl text-gray-700 mb-8 max-w-xl mx-auto md:mx-0"
+          >
+            Discover over
+            <span class="font-bold text-indigo-600">11,000+</span> exciting job
+            opportunities.
+          </p>
+
+          <div
+            class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-3 md:space-y-0 mb-8 justify-center"
+          >
+            <form
+              class="flex w-full max-w-2xl md:max-w-xl rounded-full bg-white border border-gray-300 shadow-sm focus-within:ring-2 focus-within:ring-indigo-300 overflow-hidden"
+            >
+              <input
+                type="search"
+                placeholder="Search job titles, skills, or locations..."
+                aria-label="Search jobs"
+                class="flex-grow px-4 py-2 text-base text-gray-800 placeholder-gray-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 font-semibold text-sm rounded-r-full transition-all duration-200 ease-in-out flex items-center justify-center group"
+              >
+                <svg
+                  class="w-4 h-4 mr-1 group-hover:scale-110 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                Search
+              </button>
+            </form>
+
+            <div class="flex space-x-3 justify-center md:justify-start">
+              <a
+                href="#"
+                class="inline-flex items-center justify-center px-5 py-2 rounded-full border border-indigo-600 text-indigo-600 font-semibold text-sm hover:bg-indigo-600 hover:text-white transition-all duration-200 ease-in-out shadow-sm whitespace-nowrap"
+              >
+                View Jobs
+              </a>
+              <a
+                href="#"
+                class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-semibold text-sm hover:from-indigo-700 hover:to-purple-800 transition-all duration-200 ease-in-out shadow-sm whitespace-nowrap"
+              >
+                Register FREE
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">
+              Explore Job Categories:
+            </h3>
+
+            <!-- Group wrapper to control hover -->
+            <div class="overflow-hidden whitespace-nowrap group">
+              <!-- Animated inner container -->
+              <div
+                class="flex gap-x-3 animate-marquee-slow w-max hover:[animation-play-state:paused]"
+              >
+                <!-- Duplicate content twice for seamless scroll -->
+                <div class="flex gap-x-3">
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Fresher</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Work From Home</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#WFH</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#IT</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#HR</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Back Office</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#BPO Jobs</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#ITES</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Finance</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Accounts</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Medical</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Pharma</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Manager</a
+                  >
+                </div>
+
+                <!-- Duplicate again for infinite scroll -->
+                <div class="flex gap-x-3">
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Fresher</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Work From Home</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#WFH</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#IT</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#HR</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Back Office</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#BPO Jobs</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#ITES</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Finance</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Accounts</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Medical</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Pharma</a
+                  >
+                  <a
+                    href="#"
+                    class="px-3 py-1 rounded-full bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-medium text-xs"
+                    >#Manager</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF-jLxerm0u-w/company-logo_200_200/company-logo_200_200/0/1726115138335/devx_commerce_logo?e=2147483647&v=beta&t=4CF5Bi26oTf5rU-8zLNwj5TFwCTCVFbjfzZIRdgWKPo" alt="Company B Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
+      </section>
+
+      <section class="py-5 px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+              Featured Jobs
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              Browse through our latest job openings from top employers
+            </p>
+          </div>
+
+          <!-- Scroll Container -->
+          <div class="relative">
+            <button
+              onclick="scrollJobs(-1)"
+              class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-110 transition"
+            >
+              <i class="fas fa-chevron-left text-primary text-lg"></i>
+            </button>
+
+            <div
+              id="jobContainer"
+              class="flex space-x-6 overflow-x-auto pb-8 scroll-smooth no-scrollbar px-2"
+            >
+              <!-- Job Card Template -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-building mr-1"></i> In Office job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  WordPress Developer
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAA81BMVEX///8AoYEARlGk5HP5/fyjvMA1tZsAQ0+h428CYF+965oAnXwAQFC865iq6nQAXl2n5XfR7efw+ffp9/QWVmAmaVn5/faY2HFLfIQITVO36pC45dyC0L8LpIaR1sl4zLshrJBLvaat4dZfw6/c8e0qsJaO1May4djD6eFBuaF/0MBcw66d28/W8OtOlJGi05Ha9MfH1Nc5fVnu+uVokZh6umvR8bji6uuLq7BkpWYuZ3BOj2GJyW7I76o3el3z/O2t54HY88Pl99YQVFW4y895nqRvr2ict7tYmWOQ0HBciZB/v2zZ4+Utb1pBdX0pZG270cmygwyeAAADdUlEQVR4nO3ZiVJaQRAF0AdBiYIKGJIAoqKguGUhC1nVbGYzy/9/TZIyEx2cCO8+errLuucL5lYXl+k3SUJEREREREREREREREREREREREREdH0UUNoHH9GaBfVWtI/uKczmQO2q9tk9q2iO0pr20T3L62iO9WXts3vW4IHsax/dU22jOXZslVYHHUiur310zwYao7SpfXRPrYcGaXe1z+7Zggdi67+wC1dvr6Z9ds8mPJAN7aN7+nj1ah/d10EHwuoVgVevsUvWCjyQLe2je7rwL71n65IFV29uW/vonj4ao9TRPrpvBw1ibL/dhwdia7+toZcsa9W7Cw/E1n57AFfvrK3q3UMHkmtpH92DV++e9tE9Bbx6be23ePXuah/dk+HToq399rp8WsSr19h+i1evrf22hcYwtt9meNWxVb34q46t/RavXmP7LVy9xvZb/FXH2H7bQedhbL/dRnMY22/x6jW23+LVu6p9dA9evcb2W7x6be23VTSGsf026aBB2gfaR/fgrzq29tsC+qpjbb+FX3Vytvbb5N5cCksXzN1fODefxgORIA/zRUx5sHgTUnkkEiR5nEc9WbyBeCqTIxneAnOU61CO49tCQZJn6ETKz5GRyPxC/ii8AIMU391Jn2NBLEeSvIdH8jL1SKR+6WfuoiNpvEqb5LVkjt8VjI7kMGWQ4yPRIHgFF1NWsFT1OnAFF+uVNDmaYtXrRKrgt9I5IlXwvHiOOBUsW70OWsH5yStYtnqdU3gkhxPmkK5e5wOapHgy2UjexMkhXsHNaN/APqIjKX+aZCTy1etkqODP43PEqF4Hr+DB2JHEqV7nC5qk8XVcEulLlu8U3nq/jckht9+GiVWw3H4bNvyBBqlfeeWS3G/DhCo4XvX+8x0dyVUVHOeS5ZOo4EqkS5YPruD8fys4bvU6069g+f02bOoVHLt6nRpcwUvBCo5fvc4MOpJgBce9ZPngCm4EKlijeh38w+PgUo5Y+20YXsGXPjzG2m/D8Aoe3Xq1qteBPzwWRz48KlyyPNOq4Jj7bRhewRc/PGpWrzOVtx/N6nUyvP2cV6/yL/3MFJ7fdavXyf783tSO8Ffmtx/t6nWyvv3oV6+TrYItVK+TqYJ19tuwLM/vNqrXwSv4RGu/DRvOoH5qH52IiIiIiIiIiIiIiIiIiIiIiIz7BRKbcm2voa+IAAAAAElFTkSuQmCC"
+                    alt="Nadcab Labs"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  Nadcab Labs
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 5 - 8 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                    Allahabad / Prayagraj / India
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$50k - $70k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 2 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-purple-100 text-purple-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-random mr-1"></i> Hybrid job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  Python Fullstack Developer
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="https://mma.prnewswire.com/media/1773052/Tredence_Logo.jpg?p=facebook"
+                    alt="Tredence Inc."
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  Tredence Inc.
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 5 - 8 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> Pune
+                    | Gurgaon | Bangalore
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$60k - $90k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 3 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-green-100 text-green-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-home mr-1"></i> Remote job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  HR Specialist (Junior)
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAt1BMVEX///8AAADskwH6+vq7u7vPz8/rjgDskQDrjQCsrKzt7e1VVVXa2trriwDe3t7j4+OhoaHKysp0dHRJSUkODg61tbUdHR1ubm7BwcH//fns7OwUFBSLi4tEREQ5OTn99Od+fn4xMTFmZmYqKiqWlpb76tX54cTzvoL2zJtdXV3uoDT0xY/53buGhoY+Pj5oaGjvp0fyuHPxsFztmRfunS/xsmfwp0r76tL++O/30qj54MHytmz1yJbZ0EyJAAAG3klEQVR4nO2aa1viOhRG2S1tuWUAGYRyURRQQfCKCmfO//9dp03SNKUpIsIR5nnXhykNaSfL3HfI5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcA/7H6nl6+dOlOBT+ze2CMddj/k+X5CD4sxePuRbnp8tyCMbPLvOEnuW9/HRp9s9sofQC3PvtnrLtw5Zqb/h3FrN02E06U5XKyYT2hAImzeh+Qr/CS5FqiWw2dX9HrL/i/+LOKlhJCst0rjkJA0mpT9RvtS6IzmVyOcuQGhH9s0M5bGKV8rO8qSEf9WkQ31WJBryJlgZEVZ6UaXh+kHJvy3jK1v3M3bBIzoRUt7N/k2qdTery63EaPuvjS9wNx+mcV5Srx2U/o1H81aDMzY/RcGy5Bj/Lek1ndcJyd6OyVk2lPkLDO0MDzWqk12ELrZEj7nprFpzjM3zJELRYelFaojP+77W4vaBO+n1HZzg1t9BgJH1KZx5RJbxcU4nfEhlemG1YcSSlPTtswl9kCVpsls5OV/ziiAHGpqH6xuaEn7LnQ0X+QDYGfL0GXTc5oKazt6O54ZxEoVXD6/CSc+FMw247L2ga2vaheIoF3cXdKuFrGGca1CmF2CNqh/ddNTPaxWKxObwIPx5VP3yLjbx3nhDXoptesVW1htYIE1pU17/vH53hvTaKso8w5VKluLfp/APq5Zuc/AVfotWjQVVwdIYzfZpgvMp8VamGRbetDZ1NGoSXq2hm5FwdmeFlYqVd4CPnOJI2L0l78Q3xLlghikf+OT2El+MxnK4tRYP5fblQjdQQoBnq8/uciuGlRr8rIsG+pvPjMrxf3yyx95dCJM3u0g84iX1rlXiTDBTpsV3tOD0ip5xspXM1wzu/kjO+46Rfv3fiMcVzp2Jr6KlK9RaGJyZihohoyC5YaYjBtVzNXQzFF9JQ4zE54xP9D2GPJxVtevdTi28xsK5RKyZuK7VopvhV7PWK4dDa5OuBfI13zUpRI8yq3ydftW+WH6vbdyuuL97j3vRO6T4ftACHZTy1GNOXZ2Kmz830XmnYF54Oi9ReXnS5O229ZtranwyGzS77J0j3X7WE1U+X8hssTZvdwu3N6jWuWnbKnTD3Yoo3WS7TOmHhpAP5N1nxir9FMPf6qSB7++kyfovUOi0taNgynRCXn7ZR02r0lHgyDjMxnms4aTolZp9UYWHx2Zm9nUAmJL7UM3c69tqjuaxHUi/eCf/7XbChbw7CjVJ4HYjvSjwx2hR1ekMeeuvJ7XGFf1uSj8ijDhGeq8pExXxXw9vMuKiowC1WamW9IP2oZPm0YS/ONjIYyvBVhmEv/R9vxXhjGzWFnbY1FKeGmqH9sLYzTBmKyMeeDfmKO3Oo2W6tnTB8UCU7t5OGfUqVeN3waoPhjq10xdwCc5+ypnxmOM3OMOyfCXpxycoJw5FIbMwHXf6haTCkVtqwLN7bam4oQTZL9+l2FtRTZiVu9RZuqJ2Iqr/9SDOUwQre1WpBBfM2nDIMo1Rrhm3D//gFQxE5y5owTKdMXzEMfJShCM/Io5eajF2lDYOsezWUmLcWW0ctRCsd8MbUTBhSx44Mr1U/0zAYkr1mOOEvbn0rCudnjafudntefaSZJw2vVB2eq28/MWyUkoaS3bphZJh1GGr6YdAnhr2kIU0iQ37lseA6dUNoYDaka6Ph944W/XSUhleht9VQmlGHNS3VCQ/cSHbWtkw8Sxnqj+y1Ds2K3tZbJm74cNYKeCwqw7qTMOSZJpsNK3mDYTl8b+v6G/1wPFaKnh5Ym24dWTOPpe1oBhSGPSVTp+GV2dAJfzq2bvjdsXS5YOx1zM/tmfd276oG+oXAWpZhbqIZCpmGyDDPMoxb/L4M/XDF5hWC/ZH/Z+bnVtKQ/dmuB2qGZ05doJdsGBvKRdt5seIUhxmtNFwYdNcNR/LFOzZTcZKmFth/+G3h9Wuh38S6NDxbUYYlzbBCaxgN1Yl5al063FiGLJ5FhEZG8EVIyits+fPYLQyDPqeKnqtRErNhNBClDC92EYyiiAVZh+FZNnv/8s/wNxhKLdHCtHO1brahHJP2YxjNC6/yYPeDuZbh50CfkdjjK0M5RT/GRc9VH2WDq4R/lFZk2Ilk6tpfbC+tVEYR3UV0cr3aLWpYz+sECYlf/zSDz+pM367XRsWKeCTQLjXDnLbIpbLZTZmYeO8OY+pSCLI4mn1/yodLBniExjvpE6XNhMOKx16+MvGdGCvmsacTj/VuZsFe/mq/3PLfv7h9AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAD/AcbNb6vuXERLAAAAAElFTkSuQmCC"
+                    alt="AgileEngine"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  AgileEngine
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 2 - 4 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                    Greater Buenos Aires
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$40k - $60k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 4 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-building mr-1"></i> In Office job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  Graphic Designer
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="data:image/png;base64,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"
+                    alt="Archetype"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  Archetype
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 3 - 5 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> New
+                    Delhi / India
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$35k - $50k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 5 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-purple-100 text-purple-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-random mr-1"></i> Hybrid job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  Python Fullstack Developer
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="https://mma.prnewswire.com/media/1773052/Tredence_Logo.jpg?p=facebook"
+                    alt="Tredence Inc."
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  Tredence Inc.
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 5 - 8 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> Pune
+                    | Gurgaon | Bangalore
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$60k - $90k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 6 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-green-100 text-green-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-home mr-1"></i> Remote job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  HR Specialist (Junior)
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="data:image/png;base64,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"
+                    alt="AgileEngine"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  AgileEngine
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 2 - 4 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                    Greater Buenos Aires
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$40k - $60k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Job Card 7 -->
+              <div
+                class="min-w-[320px] bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between job-card border border-gray-100"
+              >
+                <span
+                  class="text-sm px-3 py-1 bg-blue-100 text-blue-600 rounded-full mb-3 w-fit"
+                >
+                  <i class="fas fa-building mr-1"></i> In Office job
+                </span>
+                <h3 class="text-xl font-bold text-gray-800">
+                  Graphic Designer
+                </h3>
+                <p class="text-sm text-gray-600 flex items-center">
+                  <img
+                    src="data:image/png;base64,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"
+                    alt="Archetype"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  Archetype
+                </p>
+                <div class="my-4 space-y-2">
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i> Full Time
+                    - Permanent
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-clock text-primary mr-2"></i> 3 - 5 Years
+                  </p>
+                  <p class="text-sm text-gray-500 flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> New
+                    Delhi / India
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="text-lg font-bold text-secondary"
+                    >$35k - $50k</span
+                  >
+                  <a
+                    href="#"
+                    class="bg-primary text-white rounded-lg py-2 px-4 hover:bg-blue-700 transition flex items-center"
+                  >
+                    Apply <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onclick="scrollJobs(1)"
+              class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-110 transition"
+            >
+              <i class="fas fa-chevron-right text-primary text-lg"></i>
+            </button>
+          </div>
+
+          <div class="text-center mt-8">
+            <a
+              href="#"
+              class="inline-flex items-center px-6 py-3 border border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-white transition duration-300"
+            >
+              View All Jobs <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
         </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/D560BAQGWQLmThx-ieA/company-logo_200_200/company-logo_200_200/0/1726615988661/varmoda_tech_logo?e=2147483647&v=beta&t=CVVFEkhj9795SviLiWfESGiUyIrTgPafPYaPqFK36dU" alt="Company C Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
+      </section>
+      <section class="bg-white py-12 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-10">
+            Featured Employers
+          </h2>
+
+          <div
+            class="relative w-full flex overflow-hidden py-4 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+          >
+            <div
+              class="flex animate-marquee-slow whitespace-nowrap items-center"
+            >
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://www.shutterstock.com/shutterstock/photos/2200188803/display_1500/stock-vector-colorful-creative-number-logo-with-leading-lines-and-road-concept-design-number-with-geometric-2200188803.jpg"
+                  alt="Company A Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D4D0BAQF-jLxerm0u-w/company-logo_200_200/company-logo_200_200/0/1726115138335/devx_commerce_logo?e=2147483647&v=beta&t=4CF5Bi26oTf5rU-8zLNwj5TFwCTCVFbjfzZIRdgWKPo"
+                  alt="Company B Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D560BAQGWQLmThx-ieA/company-logo_200_200/company-logo_200_200/0/1726615988661/varmoda_tech_logo?e=2147483647&v=beta&t=CVVFEkhj9795SviLiWfESGiUyIrTgPafPYaPqFK36dU"
+                  alt="Company C Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/C560BAQGr-k9Sq8Ptmg/company-logo_200_200/company-logo_200_200/0/1672126158751/colladome_logo?e=2147483647&v=beta&t=ebhulF9_ECi3FuzTXvS2W12p5sc796RBi8MHV37f_qk"
+                  alt="Company D Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.glassdoor.com/sqll/227136/lotus-interworks-squarelogo-1442229701393.png"
+                  alt="Company E Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://www.jobringer.com/images/content/company-logo/hjp11e6e3219c4d1b74c89976040b163d4c.png"
+                  alt="Company F Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+            </div>
+
+            <div
+              class="flex animate-marquee-slow whitespace-nowrap items-center"
+              aria-hidden="true"
+            >
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://www.shutterstock.com/shutterstock/photos/2200188803/display_1500/stock-vector-colorful-creative-number-logo-with-leading-lines-and-road-concept-design-number-with-geometric-2200188803.jpg"
+                  alt="Company A Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D4D0BAQF-jLxerm0u-w/company-logo_200_200/company-logo_200_200/0/1726115138335/devx_commerce_logo?e=2147483647&v=beta&t=4CF5Bi26oTf5rU-8zLNwj5TFwCTCVFbjfzZIRdgWKPo"
+                  alt="Company B Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D560BAQGWQLmThx-ieA/company-logo_200_200/company-logo_200_200/0/1726615988661/varmoda_tech_logo?e=2147483647&v=beta&t=CVVFEkhj9795SviLiWfESGiUyIrTgPafPYaPqFK36dU"
+                  alt="Company C Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/C560BAQGr-k9Sq8Ptmg/company-logo_200_200/company-logo_200_200/0/1672126158751/colladome_logo?e=2147483647&v=beta&t=ebhulF9_ECi3FuzTXvS2W12p5sc796RBi8MHV37f_qk"
+                  alt="Company D Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://media.glassdoor.com/sqll/227136/lotus-interworks-squarelogo-1442229701393.png"
+                  alt="Company E Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+              <div
+                class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src="https://via.placeholder.com/150x60/F0F0F0/888888?text=CompF"
+                  alt="Company F Logo"
+                  class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/C560BAQGr-k9Sq8Ptmg/company-logo_200_200/company-logo_200_200/0/1672126158751/colladome_logo?e=2147483647&v=beta&t=ebhulF9_ECi3FuzTXvS2W12p5sc796RBi8MHV37f_qk" alt="Company D Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
+      </section>
+
+      <!-- Enhanced Location Sections -->
+      <section class="py-16 px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div
+            class="bg-white rounded-xl shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-blue-100 rounded-bl-full opacity-20"
+            ></div>
+            <h3
+              class="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4 border-gray-200 flex items-center"
+            >
+              <i class="fas fa-map-marker-alt text-primary mr-3"></i> Jobs in
+              India
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-city mr-2"></i> #Mumbai
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-landmark mr-2"></i> #Delhi
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-university mr-2"></i> #Bangalore
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-building mr-2"></i> #Hyderabad
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-umbrella-beach mr-2"></i> #Chennai
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-gopuram mr-2"></i> #Kolkata
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-industry mr-2"></i> #Pune
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-archway mr-2"></i> #Ahmedabad
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-secondary rounded-bl-full opacity-20"
+            ></div>
+            <h3
+              class="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4 border-gray-200 flex items-center"
+            >
+              <i class="fas fa-globe-americas text-primary mr-3"></i>
+              International Jobs
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-flag-usa mr-2"></i> #USA
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-landmark mr-2"></i> #UK
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-kiwi-bird mr-2"></i> #Australia
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-maple-leaf mr-2"></i> #Canada
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-gem mr-2"></i> #Singapore
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-mosque mr-2"></i> #Dubai
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-oil-well mr-2"></i> #Saudi Arabia
+              </a>
+              <a
+                href="#"
+                class="bg-blue-100 text-blue-800 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm flex items-center"
+              >
+                <i class="fas fa-kiwi-bird mr-2"></i> #New Zealand
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.glassdoor.com/sqll/227136/lotus-interworks-squarelogo-1442229701393.png" alt="Company E Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
+      </section>
+
+      <!-- Enhanced Stats Section -->
+      <section class="py-5 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+            Our Impact in Numbers
+          </h2>
+          <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+            Join thousands of job seekers and employers who found success with
+            JobRinger
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              <p class="text-5xl font-bold text-primary mb-3">40,703+</p>
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center justify-center"
+              >
+                <i class="fas fa-briefcase mr-2 text-secondary"></i> Jobs Posted
+              </p>
+            </div>
+
+            <div
+              class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              <p class="text-5xl font-bold text-primary mb-3">15,153+</p>
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center justify-center"
+              >
+                <i class="fas fa-user-check mr-2 text-secondary"></i> Jobs
+                Filled
+              </p>
+            </div>
+
+            <div
+              class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              <p class="text-5xl font-bold text-primary mb-3">25,762+</p>
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center justify-center"
+              >
+                <i class="fas fa-building mr-2 text-secondary"></i> Employers
+              </p>
+            </div>
+
+            <div
+              class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              <p class="text-5xl font-bold text-primary mb-3">1.5M+</p>
+              <p
+                class="text-gray-700 text-lg font-semibold flex items-center justify-center"
+              >
+                <i class="fas fa-users mr-2 text-secondary"></i> Active Users
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://www.jobringer.com/images/content/company-logo/hjp11e6e3219c4d1b74c89976040b163d4c.png" alt="Company F Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-      </div>
-
-      <div class="flex animate-marquee-slow whitespace-nowrap items-center" aria-hidden="true">
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://www.shutterstock.com/shutterstock/photos/2200188803/display_1500/stock-vector-colorful-creative-number-logo-with-leading-lines-and-road-concept-design-number-with-geometric-2200188803.jpg" alt="Company A Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF-jLxerm0u-w/company-logo_200_200/company-logo_200_200/0/1726115138335/devx_commerce_logo?e=2147483647&v=beta&t=4CF5Bi26oTf5rU-8zLNwj5TFwCTCVFbjfzZIRdgWKPo" alt="Company B Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/D560BAQGWQLmThx-ieA/company-logo_200_200/company-logo_200_200/0/1726615988661/varmoda_tech_logo?e=2147483647&v=beta&t=CVVFEkhj9795SviLiWfESGiUyIrTgPafPYaPqFK36dU" alt="Company C Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.licdn.com/dms/image/v2/C560BAQGr-k9Sq8Ptmg/company-logo_200_200/company-logo_200_200/0/1672126158751/colladome_logo?e=2147483647&v=beta&t=ebhulF9_ECi3FuzTXvS2W12p5sc796RBi8MHV37f_qk" alt="Company D Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://media.glassdoor.com/sqll/227136/lotus-interworks-squarelogo-1442229701393.png" alt="Company E Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-        <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-gray-100 rounded-lg shadow-sm mx-4 sm:mx-6 flex-shrink-0 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <img src="https://via.placeholder.com/150x60/F0F0F0/888888?text=CompF" alt="Company F Logo" class="max-w-[80%] max-h-[80%] object-contain transition-all duration-300">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-   <section class="bg-gray-50 py-16 px-8 font-sans">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-    <div class="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-xl">
-      <h3 class="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4 border-gray-200">Jobs in India</h3>
-      <div class="flex flex-wrap gap-x-5 gap-y-3">
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Mumbai</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Delhi</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Ajmer</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Pune</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Hyderabad</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Agra</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Chennai</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Kolkata</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Indore</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Gurugram</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Jaipur</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Ahmedabad</a>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-xl">
-      <h3 class="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4 border-gray-200">International Jobs</h3>
-      <div class="flex flex-wrap gap-x-5 gap-y-3">
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Africa</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#USA</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#UK</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Australia</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Canada</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Singapore</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Dubai</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#Saudi Arabia</a>
-        <a href="#" class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-200 shadow-sm">#New Zealand</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-    <!-- Stats Section -->
-<section class="bg-gray-50 py-12 px-6">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-10">Our Impact in Numbers</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-      <div class="p-6 bg-gray-200 rounded-lg shadow-sm">
-        <p class="text-4xl font-bold text-blue-600 mb-2">40,703</p>
-        <p class="text-gray-700 text-lg font-semibold">Jobs Posted</p>
-      </div>
-
-      <div class="p-6 bg-gray-200 rounded-lg shadow-sm">
-        <p class="text-4xl font-bold text-blue-600 mb-2">15,153</p>
-        <p class="text-gray-700 text-lg font-semibold">Jobs Filled</p>
-      </div>
-
-      <div class="p-6 bg-gray-200 rounded-lg shadow-sm">
-        <p class="text-4xl font-bold text-blue-600 mb-2">25,762</p>
-        <p class="text-gray-700 text-lg font-semibold">Employers</p>
-      </div>
-
-      <div class="p-6 bg-gray-200 rounded-lg shadow-sm">
-        <p class="text-4xl font-bold text-blue-600 mb-2">1,540,917</p>
-        <p class="text-gray-700 text-lg font-semibold">Active Users</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
+      </section>
     </section>
 
+    <footer
+      class="bg-gradient-to-br from-primary to-blue-800 text-white py-5 px-6"
+    >
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20 py-0"
+      >
+        <div class="md:col-span-2">
+          <h3 class="text-xl font-bold mb-4 flex items-center">Disclaimer</h3>
+          <p class="text-gray-200 mb-4 text-sm leading-relaxed">
+            All trademarks and logos are property of their respective owners,
+            shown here for representation purposes only. Jobringer.com has taken
+            reasonable reasonable steps to ensure the authenticity of
+            information. However, job seekers are advised to evaluate
+            independently. We do not guarantee any job to any jobseeker.
+          </p>
+          <div class="flex space-x-4 text-lg">
+            <a
+              href="#"
+              class="text-gray-300 hover:text-white transition transform hover:scale-110"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="#"
+              class="text-gray-300 hover:text-white transition transform hover:scale-110"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              href="#"
+              class="text-gray-300 hover:text-white transition transform hover:scale-110"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a
+              href="#"
+              class="text-gray-300 hover:text-white transition transform hover:scale-110"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
 
-<!-- Font Awesome CDN for icons (place in <head>) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <!-- <div>
+          <h3 class="text-lg font-semibold mb-4">For Job Seekers</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Browse Jobs</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Create Profile</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Job Alerts</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Career Advice</a
+              >
+            </li>
+          </ul>
+        </div> -->
 
-<footer class="bg-gradient-to-br from-blue-50 to-[#7ad5d5] text-gray-700 py-8 px-12 font-sans border-t border-gray-200 shadow-sm">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+        <!-- <div>
+          <h3 class="text-lg font-semibold mb-4">For Employers</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Post a Job</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Browse Candidates</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Recruiting Solutions</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Pricing Plans</a
+              >
+            </li>
+          </ul>
+        </div> -->
 
-    <div class="md:w-3/5">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Disclaimer</h3>
-      <p class="text-sm leading-relaxed text-gray-600">
-        All trademarks and logos are property of their respective owners, shown here for representation purposes only.
-        Jobringer.com has taken reasonable reasonable steps to ensure the authenticity of information. However, job seekers are
-        advised to evaluate independently. We do not guarantee any job to any jobseeker.
-      </p>
-    </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                About Us</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Contact</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Careers</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition flex items-center"
+                ><i
+                  class="fas fa-chevron-right text-xs mr-2 text-secondary"
+                ></i>
+                Blog</a
+              >
+            </li>
+          </ul>
+        </div>
 
-    <div class="md:w-2/5 flex flex-col items-start md:items-end space-y-3">
-
-      <div class="w-full md:w-auto">
-        <p class="text-sm font-medium text-gray-700 mb-1 text-left">Recognized By</p>
-        <div class="h-10 flex justify-start items-center">
-            <img src="https://i0.wp.com/www.numel.in/wp-content/uploads/2021/11/Startup-India-Logo1-02.png?fit=3042%2C788&ssl=1" alt="Startup India Recognition" class="h-full w-auto">
+        <div class="-ml-40">
+          <h3 class="text-lg font-semibold mb-1">Recognized by</h3>
+          <div class="h-13 flex justify-start items-center">
+            <img
+              src="https://i0.wp.com/www.numel.in/wp-content/uploads/2021/11/Startup-India-Logo1-02.png?fit=3042%2C788&ssl=1"
+              alt="Startup India Recognition"
+              class="h-full w-auto"
+            />
+          </div>
         </div>
       </div>
 
-      <div class="mt-3 w-full md:w-auto">
-        <h3 class="text-lg font-semibold text-gray-900 mb-2 text-left">Follow Us</h3>
-        <div class="flex space-x-4 text-xl justify-start">
-          <a href="#" class="text-blue-600 hover:text-blue-800 transition transform hover:scale-110" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="text-sky-500 hover:text-sky-700 transition transform hover:scale-110" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-pink-600 hover:text-pink-700 transition transform hover:scale-110" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-blue-700 hover:text-blue-900 transition transform hover:scale-110" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="text-red-600 hover:text-red-800 transition transform hover:scale-110" aria-label="Follow us on YouTube"><i class="fab fa-youtube"></i></a>
+      <div class="max-w-7xl mx-auto mt-6 pt-1 border-t border-gray-500">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <p class="text-sm text-gray-300">
+              © All Rights Reserved @ 2025 Jobtech Ventures Private Limited.
+            </p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="#" class="text-gray-300 hover:text-white transition"
+              >Terms & Conditions</a
+            >
+            <a href="#" class="text-gray-300 hover:text-white transition"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-300 hover:text-white transition"
+              >Refund Policy</a
+            >
+            <a href="#" class="text-gray-300 hover:text-white transition"
+              >FAQ</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="mt-8 border-t border-gray-400 pt-4 text-center">
-    <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-gray-600 mb-2">
-      <a href="#" class="hover:text-blue-700 transition">Terms & Conditions</a>
-      <a href="#" class="hover:text-blue-700 transition">Privacy Policy</a>
-      <a href="#" class="hover:text-blue-700 transition">Refund Policy</a>
-      <a href="#" class="hover:text-blue-700 transition">About Us</a>
-      <a href="#" class="hover:text-blue-700 transition">Contact Us</a>
-      <a href="#" class="hover:text-blue-700 transition">FAQ</a>
-      <a href="#" class="hover:text-blue-700 transition">Blogs</a>
-    </div>
-    <p class="text-xs text-gray-500">© All Rights Reserved @ 2025 Jobtech Ventures Private Limited.</p>
-  </div>
-</footer>
-
-
-
-
-
-
+    </footer>
   </body>
 </html>
